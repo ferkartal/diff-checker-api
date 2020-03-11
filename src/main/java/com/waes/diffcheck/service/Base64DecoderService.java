@@ -42,7 +42,7 @@ public class Base64DecoderService {
             LOGGER.info("{} is valid json", decodedJson);
             return decodedJson;
         }
-        throw new InvalidJsonFormatException("Base64 encoded value: {} is invalid Json format" + base64EncodedJson);
+        throw new InvalidJsonFormatException("Base64 encoded value: " + base64EncodedJson + "is invalid Json format");
     }
 
     /**

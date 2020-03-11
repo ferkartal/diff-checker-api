@@ -68,10 +68,6 @@ public class DiffCheckerService {
                 diffInfoDtoList.add(DiffInfoDto.builder().offset(offset).length(index - offset).build());
             }
         }
-
-        if (isDiffExist) {
-            diffInfoDtoList.add(DiffInfoDto.builder().offset(offset).length(left.length() - offset).build());
-        }
         return diffInfoDtoList;
     }
 

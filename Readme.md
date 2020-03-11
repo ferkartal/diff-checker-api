@@ -11,6 +11,7 @@ According to the task, api call can be using for the checking Json data and make
     -- If equal
     -- If not of equal size just 
     -- If of same size provide insight in where the diffs are, actual diffs are not needed.
+   
     > Mainly offsets + length in the data
 
 ## Tech
@@ -47,6 +48,7 @@ The directory structure of the project looks like the following.
 |       \---resources
 |       |   |---application.properties
 |---pom.xml
+|---Dockerfile
 ```
 ### Pre-requisite
 Before running the project on your local machine, please be sure that following items should be installed;
@@ -57,7 +59,7 @@ Before running the project on your local machine, please be sure that following 
 Clone the source code.
 
 ```sh
-$ git clone <URL>
+$ git clone https://github.com/ferkartal/diff-checker-api.git
 ```
 #### Running Tests
 
@@ -66,7 +68,7 @@ $ mvn test
 ```
 ### Deploy the project
 
-####  Docker - build the images
+####  Docker - build the image
 
 - Go to the "diff-checker-api" folder
 ```
@@ -74,9 +76,9 @@ $ cd diff-checker-api
 $ docker build -t diff-checker-api .
 ```
 
-#### Docker - run the containers
+#### Docker - run the container
 ```
-docker run -p 8080:8080 diff-checker-api 
+docker run -it -p 8080:8080 diff-checker-api 
 ```
 
 ### Sample Requests
@@ -84,19 +86,20 @@ docker run -p 8080:8080 diff-checker-api
 #### Example #1
 ```sh
 POST http://localhost:8080/v1/diff/1/left
-```
-##### Encoded Base64 Data Request #1
+
+Encoded Base64 Data Request #1
 - eyJkYXRhIjoibW9uZGF5In0=
-##### Decoded Version of Request #1
+Decoded Version of Request #1
 - {"data":"monday"}
 ```
-POST http://localhost:8080/v1/diff/1/right
 ```
-##### Encoded Base64 Data Request #2
--  eyJkYXRlIjoic3VuZGF5In0= 
-##### Decoded Version of Request #2
-- {"date":"sunday"}
+POST http://localhost:8080/v1/diff/1/right
 
+Encoded Base64 Data Request #2
+-  eyJkYXRlIjoic3VuZGF5In0= 
+Decoded Version of Request #2
+- {"date":"sunday"}
+```
 #### Result of diff-check api
 
 ```
@@ -116,20 +119,23 @@ GET http://localhost:8080/v1/diff/1
 }
 ```
 #### Example #2
-##### Encoded Base64 Data Request #1
-- eyJkYXRlIjoic3VuZGF5In0=
-##### Decoded Version of Request #1
-- {"date":"sunday"}
 ```
 POST http://localhost:8080/v1/diff/1/left
-```
-##### Encoded Base64 Data Request #2
+
+Encoded Base64 Data Request #1
 - eyJkYXRlIjoic3VuZGF5In0=
-##### Decoded Version of Request #2
+Decoded Version of Request #1
 - {"date":"sunday"}
 ```
-POST http://localhost:8080/v1/diff/1/right
 ```
+POST http://localhost:8080/v1/diff/1/right
+
+Encoded Base64 Data Request #2
+- eyJkYXRlIjoic3VuZGF5In0=
+Decoded Version of Request #2
+- {"date":"sunday"}
+```
+
 #### Result of diff-check api
 ```
 GET http://localhost:8080/v1/diff/1
@@ -139,19 +145,22 @@ GET http://localhost:8080/v1/diff/1
 }
 ```
 #### Example #3
-##### Encoded Base64 Data Request #1
-- eyJkYXRlIjoic3VuZGF5In0= 
-##### Decoded Version of Request #1
-- {"date":"sunday"}
 ```
 POST http://localhost:8080/v1/diff/1/left
+
+Encoded Base64 Data Request #1
+- eyJkYXRlIjoic3VuZGF5In0= 
+Decoded Version of Request #1
+- {"date":"sunday"}
 ```
-##### Encoded Base64 Data Request #2
-- eyJkYXRhIjoidHVlc2RheSJ9
-##### Decoded Version of Request #2
-- {"date":"tuesday"}
 ```
 POST http://localhost:8080/v1/diff/1/right
+
+Encoded Base64 Data Request #2
+- eyJkYXRhIjoidHVlc2RheSJ9
+Decoded Version of Request #2
+- {"date":"tuesday"}
+
 ```
 #### Result of diff-check api
 ```
