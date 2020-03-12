@@ -88,7 +88,7 @@ public class DiffCheckerControllerIT {
 
         //then
         resultActions.andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.message").value("Invalid input value: " + requestBody));
+                .andExpect(jsonPath("$.message").value("Base64 encoded value: eyJkYXRhIjp9is invalid Json format"));
 
     }
 
